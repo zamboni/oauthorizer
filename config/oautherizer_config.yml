@@ -1,0 +1,9 @@
+google:
+  key: 26827780047.apps.googleusercontent.com
+  secret: fXm1-GlSlghfeL_5MPuD-vAg
+  scope: https://www.googleapis.com/auth/latitude.all.best+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email
+  redirect_uri: http://localhost:3030/callbacks/google.json
+  client_id: 26827780047.apps.googleusercontent.com
+  server_port: 3030
+  user_email: 'test@zambonidev.com'
+  user_password: 'hefu-lino-ke-cyt'

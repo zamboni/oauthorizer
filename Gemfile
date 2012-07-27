@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
-gem 'rack', '~> 1.4'
-gem 'capybara'
 
 # Specify your gem's dependencies in oauthorizer.gemspec
 gemspec
+
+gem 'rspec'
+gem 'capybara'
+gem 'debugger'
+
+gem 'rails'
+gem 'addressable', git: 'https://github.com/sporkmonger/addressable.git'
