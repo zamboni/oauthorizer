@@ -5,11 +5,11 @@ module RailsApp
   class Application < Rails::Application
  
     routes.draw do
-      # resources :callbacks do
-      #   collection do
-      #     get 'google'
-      #   end
-      # end
+      resources :callbacks do
+        collection do
+          get 'google'
+        end
+      end
 
       get  '/' => 'rails/profiles#show'
     end
