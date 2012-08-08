@@ -62,7 +62,7 @@ module Oauthorizer
     def get_foursquare_token_hash
       config_file             = File.join(Rails.root, 'config', 'oauthorizer_config.yml')
       oauthorizer_keys        = YAML.load_file(config_file)['foursquare']
-      if oauthorizer_keys['expires_at'].nil? || oauthorizer_keys['expires_at'] < Time.now
+      if oauthorizer_keys['access_token'].nil? 
         Capybara.default_driver = :selenium
         Capybara.server_port    = oauthorizer_keys['server_port']
         self.visit "https://www.foursquare.com/oauth2/authenticate?" +
@@ -76,7 +76,7 @@ module Oauthorizer
         # find('.newGreenButton').click
 
         parsed_response = JSON.parse page.text
-        self.update_from_token_hash 'facebook', parsed_response, 'expires'
+        self.update_from_token_hash 'foursquare', parsed_response
 
         parsed_response
       else
@@ -87,7 +87,8 @@ module Oauthorizer
     def update_from_token_hash provider_type, token_hash, time_string=nil
       config_file = File.join(Rails.root, 'config', 'oauthorizer_config.yml')
       credentials ||= YAML.load_file(config_file)
-      credentials[provider_type].merge!(token_hash).merge!('expires_at' => (Time.now + token_hash[time_string].to_i.seconds)) unless time_string.nil?
+      credentials[provider_type].merge!(token_hash)
+      credentials[provider_type].merge!('expires_at' => (Time.now + token_hash[time_string].to_i.seconds)) unless time_string.nil?
 
       new_file = File.open(config_file, 'w+')
       new_file.write(credentials.to_yaml.gsub("---\n", ''))
